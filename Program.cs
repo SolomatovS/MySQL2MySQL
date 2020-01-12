@@ -28,6 +28,10 @@ namespace mysql_replication
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddOptions();
+
+                    services.Configure<ConsumerOption>(option => hostContext.Configuration.GetSection("Consumer").Bind(option));
+
+                    services.AddHostedService<Consumer>();
                 })
                 .Build();
 
